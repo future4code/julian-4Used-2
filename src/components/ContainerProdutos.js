@@ -18,7 +18,7 @@ const ContainerProdutos = styled.div`
 
 class App extends React.Component {
     state={
-        listaDeProdutos = [];
+        listaDeProdutos = []
     }
 
     componentDidMount = () => {
