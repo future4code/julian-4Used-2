@@ -14,7 +14,6 @@ const ContainerProdutos = styled.div`
     gap: 10px;
     column-gap: 10px;
     justify-content: center;
-    margin: 20px auto;
     padding: 90px 50px;
 `
 
