@@ -46,6 +46,7 @@ export class AppContainer extends Component {
           <DivApp>
             <Header />
             <SecaoProdutos adicionarAoCarrinho={this.adicionarAoCarrinho} />
+            <Carrinho lista={this.state.listaCarrinho}/>
           </DivApp>
         )
       case 'cadastro':

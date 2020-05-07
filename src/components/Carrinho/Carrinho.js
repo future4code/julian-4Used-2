@@ -2,10 +2,11 @@ import React from 'react'
 import {CardCarrinho} from './CardCarrinho'
 import styled from 'styled-components'
 
-const ContentCards = styled.div`
+const CardContent = styled.div`
 display: flex;
 flex-direction: column;
-justify-content: center;
+justify-content: ecnter;
+align-itens: center;
 `
 
 export class Carrinho extends React.Component {
@@ -14,7 +15,7 @@ export class Carrinho extends React.Component {
         // const lista = this.props.lista
         
         return (
-        <ContentCards>
+        <CardContent>
         <h2>Meu Carrinho</h2>
         <div>
             {/* {lista.map((produto) => {
@@ -23,6 +24,6 @@ export class Carrinho extends React.Component {
 
             <CardCarrinho/>
         </div>
-        </ContentCards>
+        </CardContent>
          )}
 }
