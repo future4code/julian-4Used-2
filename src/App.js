@@ -19,7 +19,8 @@ const jss = create({
 	insertionPoint: document.getElementById('jss-insertion-point'),
 })
 
-const theme = createMuiTheme()
+const theme = createMuiTheme(
+)
 
 function App() {
 	return (

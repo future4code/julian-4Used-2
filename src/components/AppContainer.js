@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import Header from './Header'
+import QueroVender from './QueroVender/queroVender'
+
+
 
 const DivApp=styled.div`
   
@@ -8,8 +11,15 @@ const DivApp=styled.div`
 
 export class AppContainer extends Component {
   state={
-    secaoAtual: 'inicio'
+    secaoAtual: 'cadastro'
   }
+
+//  onClickMudaDePagina=()=> {
+//     return(
+//     this.setState({secaoAtual:'cadrasto' })
+//     )
+//   }
+  
   render() {
     switch(this.state.secaoAtual){
       case 'inicio':
@@ -21,7 +31,7 @@ export class AppContainer extends Component {
       case 'cadastro':
         return (
           <DivApp>
-            <Header />
+            <QueroVender />
           </DivApp>
         )
       case 'carrinho':
