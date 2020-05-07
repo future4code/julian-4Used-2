@@ -11,7 +11,7 @@ const DivApp=styled.div`
 
 export class AppContainer extends Component {
   state={
-    secaoAtual: 'inicio',
+    secaoAtual: '',
     listaCarrinho: []
   }
 
@@ -46,27 +46,27 @@ export class AppContainer extends Component {
 
   render() {
     switch(this.state.secaoAtual){
-      case 'inicio':
-        return (
-          <DivApp>
-            <Header estado={this.state.secao} mudarSecao={this.mudarSecao} />
-            <SecaoProdutos adicionarAoCarrinho={this.adicionarAoCarrinho} />
-          </DivApp>
-        )
       case 'cadastro':
         return (
           <DivApp>
-            <Header estado={this.state.secao} mudarSecao={this.mudarSecao} />
+            <Header estado={this.state.secaoAtual} mudarSecao={this.mudarSecao} />
             <QueroVender />
           </DivApp>
         )
       case 'carrinho':
         return (
           <DivApp>
-            <Header estado={this.state.secao} mudarSecao={this.mudarSecao} />
+            <Header estado={this.state.secaoAtual} mudarSecao={this.mudarSecao} />
             {/* <Carrinho lista={this.state.listaCarrinho}/> */}
             carrinho
           </DivApp>
+        )
+      default:
+          return (
+            <DivApp>
+              <Header estado={this.state.secaoAtual} mudarSecao={this.mudarSecao} />
+              <SecaoProdutos adicionarAoCarrinho={this.adicionarAoCarrinho} />
+            </DivApp>
         )
     }
   }
