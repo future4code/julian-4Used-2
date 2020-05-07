@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import Header from './Header'
 import SecaoProdutos from './SecaoProdutos'
+import { Carrinho } from './Carrinho/Carrinho'
 
 const DivApp=styled.div`
   
@@ -57,6 +58,7 @@ export class AppContainer extends Component {
         return (
           <DivApp>
             <Header />
+            <Carrinho lista={this.state.listaCarrinho}/>
           </DivApp>
         )
     }
