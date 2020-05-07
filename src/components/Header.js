@@ -10,7 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import logo from '../img/4used.png'
 
 const Seletor = styled(TextField)`
-flex-basis:200px;
+  flex-basis:200px;
 `
 
 const ranges = [
@@ -52,36 +52,36 @@ const ImgLogo = styled.img`
 
 
 const Botao1 = styled(Fab)`    
-background-color: #45aaa4;
-color:white;
-font-weight: bold;
-text-transform: none;
-:hover {
-  background-color: #248c85;
-}
+  background-color: #45aaa4;
+  color:white;
+  font-weight: bold;
+  text-transform: none;
+  :hover {
+    background-color: #248c85;
+  }
 `
 
 const Botao2 = styled(Fab)` 
-width:100px;
-height:33px; 
-background-color: #f04d3c;
-color:white;
-font-weight: bold;
-text-transform: none;
-:hover {
-  background-color: ${red[700]};
-}
+  width:100px;
+  height:33px; 
+  background-color: #f04d3c;
+  color:white;
+  font-weight: bold;
+  text-transform: none;
+  :hover {
+    background-color: ${red[700]};
+  }
 `
 const Botao3 = styled(Fab)`
-width:90px;
-height:33px;    
-background-color: #fbca64;
-color:white;
-font-weight: bold;
-text-transform: none;
-:hover {
-  background-color: #c39725;
-}
+  width:90px;
+  height:33px;    
+  background-color: #fbca64;
+  color:white;
+  font-weight: bold;
+  text-transform: none;
+  :hover {
+    background-color: #c39725;
+  }
 `
 const DivBotao = styled.div`
   width: 400px;
@@ -90,11 +90,25 @@ const DivBotao = styled.div`
   margin: 10px;
 `
 class Header extends React.Component {
+  state={
+    secaoClicada: ''
+  }
+
+  atualizaSecaoClicada = (secao) => {
+    console.log(secao);
+    this.setState({secaoClicada: secao});
+  }
+
+  componentDidUpdate = (prevProps) => {
+    if(this.state.secaoClicada !== prevProps.estado){
+         this.props.mudarSecao(this.state.secaoClicada);
+    }
+  }
 
   render() {
     return (
       <HeaderFlex>
-        <ImgLogo src={logo} onClick={() => this.props.mudarSecao('inicio')} />
+        <ImgLogo src={logo} onClick={() => this.atualizaSecaoClicada('')} />
         <Seletor
           select        
           variant="filled"
@@ -113,8 +127,8 @@ class Header extends React.Component {
         />
 
         <DivBotao>
-          <Botao1 size="small" variant="extended" onClick={() => this.props.mudarSecao('cadastro')}>quero vender</Botao1>
-          <Botao2 variant="extended" onClick={() => this.props.mudarSecao('carrinho')}>carrinho</Botao2>
+          <Botao1 size="small" variant="extended" onClick={() => this.atualizaSecaoClicada('cadastro')}>quero vender</Botao1>
+          <Botao2 variant="extended" onClick={() => this.atualizaSecaoClicada('carrinho')}>carrinho</Botao2>
           <Botao3 variant="extended">entrar</Botao3>
         </DivBotao>
       </HeaderFlex>
