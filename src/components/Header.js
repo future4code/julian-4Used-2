@@ -47,6 +47,7 @@ const HeaderFlex = styled.header`
 
 const ImgLogo = styled.img`
     width: 80px;
+    cursor: pointer;
 `
 
 
@@ -90,15 +91,13 @@ const DivBotao = styled.div`
 `
 class Header extends React.Component {
 
-
   render() {
     return (
       <HeaderFlex>
-        <ImgLogo src={logo} />
+        <ImgLogo src={logo} onClick={() => this.props.mudarSecao('inicio')} />
         <Seletor
           select        
           variant="filled"
-
         >
           {ranges.map(option => (
             <MenuItem key={option.value} value={option.value}>
@@ -114,8 +113,8 @@ class Header extends React.Component {
         />
 
         <DivBotao>
-          <Botao1 size="small" variant="extended">quero vender</Botao1>
-          <Botao2 variant="extended">carrinho</Botao2>
+          <Botao1 size="small" variant="extended" onClick={() => this.props.mudarSecao('cadastro')}>quero vender</Botao1>
+          <Botao2 variant="extended" onClick={() => this.props.mudarSecao('carrinho')}>carrinho</Botao2>
           <Botao3 variant="extended">entrar</Botao3>
         </DivBotao>
       </HeaderFlex>
