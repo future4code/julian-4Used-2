@@ -90,25 +90,10 @@ const DivBotao = styled.div`
   margin: 10px;
 `
 class Header extends React.Component {
-  state={
-    secaoClicada: ''
-  }
-
-  atualizaSecaoClicada = (secao) => {
-    console.log(secao);
-    this.setState({secaoClicada: secao});
-  }
-
-  componentDidUpdate = (prevProps) => {
-    if(this.state.secaoClicada !== prevProps.estado){
-         this.props.mudarSecao(this.state.secaoClicada);
-    }
-  }
-
   render() {
     return (
       <HeaderFlex>
-        <ImgLogo src={logo} onClick={() => this.atualizaSecaoClicada('')} />
+        <ImgLogo src={logo} onClick={() => this.props.mudarSecao('')} />
         <Seletor
           select        
           variant="filled"
@@ -127,8 +112,8 @@ class Header extends React.Component {
         />
 
         <DivBotao>
-          <Botao1 size="small" variant="extended" onClick={() => this.atualizaSecaoClicada('cadastro')}>quero vender</Botao1>
-          <Botao2 variant="extended" onClick={() => this.atualizaSecaoClicada('carrinho')}>carrinho</Botao2>
+          <Botao1 size="small" variant="extended" onClick={() => this.props.mudarSecao('cadastro')}>quero vender</Botao1>
+          <Botao2 variant="extended" onClick={() => this.props.mudarSecao('carrinho')}>carrinho</Botao2>
           <Botao3 variant="extended">entrar</Botao3>
         </DivBotao>
       </HeaderFlex>
