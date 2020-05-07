@@ -18,9 +18,9 @@ export class Carrinho extends React.Component {
         <CardContent>
         <h2>Meu Carrinho</h2>
         <div>
-            {lista.map((produto) => {
+            {/* {lista.map((produto) => {
             <CardCarrinho nome={produto.name}/>
-            })}
+            })} */}
             <CardCarrinho/>
         </div>
         </CardContent>
