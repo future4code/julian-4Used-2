@@ -12,16 +12,15 @@ align-itens: center;
 export class Carrinho extends React.Component {
    
     render() {
-        // const lista = this.props.lista
+        const lista = this.props.lista
         
         return (
         <CardContent>
         <h2>Meu Carrinho</h2>
         <div>
-            {/* {lista.map((produto) => {
+            {lista.map((produto) => {
             <CardCarrinho nome={produto.name}/>
-            })} */}
-
+            })}
             <CardCarrinho/>
         </div>
         </CardContent>
