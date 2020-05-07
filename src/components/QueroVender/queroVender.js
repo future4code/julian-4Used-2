@@ -1,6 +1,5 @@
 // Imports De Componentes React
 import React from 'react';
-import Header from '../Header';
 
 // Imports de Libs Para Desenvolvimento
 import styled, { ThemeConsumer } from 'styled-components'
@@ -9,14 +8,13 @@ import styled, { ThemeConsumer } from 'styled-components'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-const HeaderFlex=styled.header`
- height:70vh
+const DivFlex=styled.div`
+ height:70vh;
  width:100vw;
  display:flex;
  flex-direction:column;
  align-items:center;
- position:relative;
- top:100px;
+ padding-top: 70px;
 `
 
 const BlocoInput=styled.div`
@@ -65,11 +63,7 @@ bottom:165px;
 class QueroVender extends React.Component{
     render() {
         return(
-            // div criada pra englobar o Header
-            <div>
-              <Header/>
-            
-            <HeaderFlex>
+            <DivFlex>
                <TextoVendas><h3>Cadastro de Produto</h3> </TextoVendas>
              
              <BlocoInput>
@@ -155,10 +149,7 @@ class QueroVender extends React.Component{
                   </Button>
                 </label>
               </ButtonConcluir>
-
-          
-            </HeaderFlex>
-            </div>
+            </DivFlex>
         )
     }
 }
