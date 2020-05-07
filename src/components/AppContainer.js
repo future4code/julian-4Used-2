@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import Header from './Header'
 import SecaoProdutos from './SecaoProdutos'
-import { Carrinho } from './Carrinho/Carrinho'
+// import { Carrinho } from './Carrinho/Carrinho'
+import QueroVender from './QueroVender/queroVender'
 
 const DivApp=styled.div`
   
@@ -10,7 +11,7 @@ const DivApp=styled.div`
 
 export class AppContainer extends Component {
   state={
-    secaoAtual: 'inicio',
+    secaoAtual: '',
     listaCarrinho: []
   }
 
@@ -39,6 +40,10 @@ export class AppContainer extends Component {
     this.setState({listaCarrinho: lista})
   }
 
+  mudarSecao = (secaoClicada) => {
+    this.setState({secaoAtual: secaoClicada});
+  }
+
   render() {
     switch(this.state.secaoAtual){
       case 'inicio':
@@ -46,21 +51,29 @@ export class AppContainer extends Component {
           <DivApp>
             <Header />
             <SecaoProdutos adicionarAoCarrinho={this.adicionarAoCarrinho} />
-            <Carrinho lista={this.state.listaCarrinho}/>
           </DivApp>
         )
       case 'cadastro':
         return (
           <DivApp>
-            <Header />
+            <Header estado={this.state.secaoAtual} mudarSecao={this.mudarSecao} />
+            <QueroVender />
           </DivApp>
         )
       case 'carrinho':
         return (
           <DivApp>
-            <Header />
-            <Carrinho lista={this.state.listaCarrinho}/>
+            <Header estado={this.state.secaoAtual} mudarSecao={this.mudarSecao} />
+            {/* <Carrinho lista={this.state.listaCarrinho}/> */}
+            carrinho
           </DivApp>
+        )
+      default:
+          return (
+            <DivApp>
+              <Header estado={this.state.secaoAtual} mudarSecao={this.mudarSecao} />
+              <SecaoProdutos adicionarAoCarrinho={this.adicionarAoCarrinho} />
+            </DivApp>
         )
     }
   }

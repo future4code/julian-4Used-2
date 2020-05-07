@@ -5,8 +5,8 @@ import styled from 'styled-components'
 const CardContent = styled.div`
 display: flex;
 flex-direction: column;
-justify-content: ecnter;
-align-itens: center;
+justify-content: center;
+align-items: center;
 `
 
 export class Carrinho extends React.Component {
