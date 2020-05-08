@@ -40,6 +40,13 @@ export class AppContainer extends Component {
     this.setState({listaCarrinho: lista})
   }
 
+  removerDoCarrinho = (id) => {
+    let lista = [...this.state.listaCarrinho];
+    let produto = this.state.listaCarrinho.findIndex((produto) => produto.id === id);
+    lista.splice(produto, 1);
+    this.setState({listaCarrinho: lista})
+  }
+
   mudarSecao = (secaoClicada) => {
     this.setState({secaoAtual: secaoClicada});
   }
@@ -64,7 +71,7 @@ export class AppContainer extends Component {
         return (
           <DivApp>
             <Header estado={this.state.secaoAtual} mudarSecao={this.mudarSecao} />
-            <Carrinho />
+            <Carrinho lista={this.state.listaCarrinho} removerDoCarrinho={this.removerDoCarrinho}/>
           </DivApp>
         )
       default:
