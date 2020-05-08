@@ -36,7 +36,7 @@ const ranges = [
 ];
 
 const HeaderFlex = styled.header`
-  position: fixed;
+  ${props => (props.estado==='') && ({position: 'fixed'})} 
   width: 100vw;
   display: flex;
   align-items: center;
@@ -93,7 +93,7 @@ const DivBotao = styled.div`
 class Header extends React.Component {
   render() {
     return (
-      <HeaderFlex>
+      <HeaderFlex estado={this.props.estado}>
         <ImgLogo src={logo} onClick={() => this.props.mudarSecao('')} />
         <Seletor
           select        
