@@ -15,6 +15,10 @@ const Imagem = styled.img`
     max-height: 150px;
 `
 
+const IconeCarrinho = styled(AddShoppingCart)`
+    z-index: -1;
+`
+
 //componente que retorna cada produto individualmente, chamado na SecaoProdutos.js passando props
 class CardProduto extends React.Component {
     render(){
@@ -27,7 +31,7 @@ class CardProduto extends React.Component {
                 : <p>R${this.props.valor.toFixed(2)} à vista</p>
             }
             <IconButton onClick={() => this.props.passarCarrinho(this.props.id)}>
-                <AddShoppingCart />
+                <IconeCarrinho />
             </IconButton>
             <h3>{this.props.nome}</h3>
             <p>{this.props.descricao}</p>
