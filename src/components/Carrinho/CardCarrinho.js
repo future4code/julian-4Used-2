@@ -52,7 +52,7 @@ class CardCarrinho extends React.Component {
                   <Botao><IconeAdiciona/></Botao>
               </DivQuantidade>
               <DivPrecoProdutoIndividual>
-                  R$50.00
+                  R$500.00
               </DivPrecoProdutoIndividual>
           </ProdutoArtigo>
       </div>
