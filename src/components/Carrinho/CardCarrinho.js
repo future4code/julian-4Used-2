@@ -60,5 +60,3 @@ class CardCarrinho extends React.Component {
 }
 
 export default CardCarrinho
-
-   
