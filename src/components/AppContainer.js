@@ -46,6 +46,14 @@ export class AppContainer extends Component {
 
   render() {
     switch(this.state.secaoAtual){
+
+      case 'inicio':
+        return (
+          <DivApp>
+            <Header />
+            <SecaoProdutos adicionarAoCarrinho={this.adicionarAoCarrinho} />
+          </DivApp>
+        )
       case 'cadastro':
         return (
           <DivApp>
@@ -57,8 +65,6 @@ export class AppContainer extends Component {
         return (
           <DivApp>
             <Header estado={this.state.secaoAtual} mudarSecao={this.mudarSecao} />
-            {/* <Carrinho lista={this.state.listaCarrinho}/> */}
-            carrinho
           </DivApp>
         )
       default:

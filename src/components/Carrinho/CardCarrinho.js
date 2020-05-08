@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Botao from '@material-ui/core/Button'
 import RemoveCarrinho from '@material-ui/icons/RemoveShoppingCart'
 import IconeAdiciona from '@material-ui/icons/Add';
 import IconeRemove from '@material-ui/icons/Remove';
@@ -36,13 +37,13 @@ export class CardCarrinho extends React.Component {
                   <p>parcelas</p> 
               </InfoProduto>
               <DivRemoveCarrinho>
-                  <RemoveCarrinho />
+                  <Botao><RemoveCarrinho/></Botao>
                   <p>Excluir</p>
               </DivRemoveCarrinho>
               <DivQuantidade>
-                  <IconeRemove/>
+                  <Botao><IconeRemove/></Botao>
                   <input/>
-                  <IconeAdiciona/>
+                  <Botao><IconeAdiciona/></Botao>
               </DivQuantidade>
               <DivPrecoProdutoIndividual>R$50.00</DivPrecoProdutoIndividual>
           </ProdutoArtigo>
