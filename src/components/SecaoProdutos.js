@@ -47,23 +47,23 @@ class SecaoProdutos extends React.Component {
         const lista = this.state.listaDeProdutos
 
         return (
-        <DivApp>
-            <ContainerProdutos linhas={Math.ceil(lista.length/5)}>
-                {lista.map(produto => {
-                        return <CardProduto 
-                            key={produto.id}
-                            id={produto.id}
-                            valor={produto.price}
-                            linkImagem={produto.photos[0]} 
-                            nome={produto.name}
-                            parcelas={produto.installments}
-                            pagamento={produto.paymentMethod}
-                            descricao={produto.description}
-                            passarCarrinho={this.produtoParaCarrinho}
-                        />
-                })}
-            </ContainerProdutos>
-        </DivApp>
+            <DivApp>
+                <ContainerProdutos linhas={Math.ceil(lista.length/5)}>
+                    {lista.map(produto => {
+                            return <CardProduto 
+                                key={produto.id}
+                                id={produto.id}
+                                valor={produto.price}
+                                linkImagem={produto.photos[0]} 
+                                nome={produto.name}
+                                parcelas={produto.installments}
+                                pagamento={produto.paymentMethod}
+                                descricao={produto.description}
+                                passarCarrinho={this.produtoParaCarrinho}
+                            />
+                    })}
+                </ContainerProdutos>
+            </DivApp>
         );
     }
 }

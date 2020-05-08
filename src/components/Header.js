@@ -43,6 +43,7 @@ const HeaderFlex = styled.header`
   justify-content: space-between;
   padding: 0 20px;
   border-bottom: 2px solid gainsboro;
+  background-color: white;
 `
 
 const ImgLogo = styled.img`
