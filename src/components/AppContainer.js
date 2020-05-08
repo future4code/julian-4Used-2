@@ -64,6 +64,7 @@ export class AppContainer extends Component {
         return (
           <DivApp>
             <Header estado={this.state.secaoAtual} mudarSecao={this.mudarSecao} />
+            <Carrinho />
           </DivApp>
         )
       default:

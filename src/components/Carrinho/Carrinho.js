@@ -17,15 +17,16 @@ const TituloCarrinho = styled.div`
 class Carrinho extends React.Component {
     render() {        
         return (
-        <CardContent>
-        <h2>Meu Carrinho</h2>
-        <div>
-            {/* {lista.map((produto) => {
-            <CardCarrinho nome={produto.name}/>
-            })} */}
-
-            <CardCarrinho/>
-        </div>
-        </CardContent>
-         )}
+        <DivApp>    
+            <CardContent>
+                <TituloCarrinho>
+                    <h2>Meu Carrinho</h2>
+                </TituloCarrinho>                
+                <CardCarrinho/>
+            </CardContent>
+        </DivApp>    
+         )
+    }
 }
+
+export default Carrinho
