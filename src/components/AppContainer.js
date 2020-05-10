@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import Header from './Header'
+import SecaoProdutos from './SecaoProdutos'
+import Carrinho  from './Carrinho/Carrinho'
 import QueroVender from './QueroVender/queroVender'
-
-
 
 const DivApp=styled.div`
   
@@ -11,34 +11,68 @@ const DivApp=styled.div`
 
 export class AppContainer extends Component {
   state={
-    secaoAtual: 'cadastro'
+    secaoAtual: '',
+    listaCarrinho: []
   }
 
-//  onClickMudaDePagina=()=> {
-//     return(
-//     this.setState({secaoAtual:'cadrasto' })
-//     )
-//   }
-  
+  componentDidUpdate = () => {
+    localStorage.setItem("carrinho", JSON.stringify(this.state.listaCarrinho))
+  }
+
+  componentDidMount = () => {
+    const resgataCarrinho = JSON.parse(localStorage.getItem("carrinho"));
+    if(resgataCarrinho !== null){
+      this.setState({listaCarrinho: resgataCarrinho})
+    }
+  }
+
+  adicionarAoCarrinho = (produtoParaAdicionar) => {
+    let lista = [...this.state.listaCarrinho];
+    let existe = this.state.listaCarrinho.findIndex((produto) => produto.id === produtoParaAdicionar.id);
+    if(existe > -1){
+        lista[existe].quantidade++;
+    }
+    else{
+      produtoParaAdicionar.quantidade=1;
+      lista.push(produtoParaAdicionar);
+    }
+    
+    this.setState({listaCarrinho: lista})
+  }
+
+  removerDoCarrinho = (id) => {
+    let lista = [...this.state.listaCarrinho];
+    let produto = this.state.listaCarrinho.findIndex((produto) => produto.id === id);
+    lista.splice(produto, 1);
+    this.setState({listaCarrinho: lista})
+  }
+
+  mudarSecao = (secaoClicada) => {
+    this.setState({secaoAtual: secaoClicada});
+  }
+
   render() {
     switch(this.state.secaoAtual){
-      case 'inicio':
-        return (
-          <DivApp>
-            <Header />
-          </DivApp>
-        )
       case 'cadastro':
         return (
           <DivApp>
+            <Header estado={this.state.secaoAtual} mudarSecao={this.mudarSecao} />
             <QueroVender />
           </DivApp>
         )
       case 'carrinho':
         return (
           <DivApp>
-            <Header />
+            <Header estado={this.state.secaoAtual} mudarSecao={this.mudarSecao} />
+            <Carrinho lista={this.state.listaCarrinho} removerDoCarrinho={this.removerDoCarrinho}/>
           </DivApp>
+        )
+      default:
+          return (
+            <DivApp>
+              <Header estado={this.state.secaoAtual} mudarSecao={this.mudarSecao} />
+              <SecaoProdutos adicionarAoCarrinho={this.adicionarAoCarrinho} />
+            </DivApp>
         )
     }
   }

@@ -1,6 +1,5 @@
 // Imports De Componentes React
 import React from 'react';
-import Header from '../Header';
 
 // Imports de Libs Para Desenvolvimento
 import styled, { ThemeConsumer } from 'styled-components'
@@ -109,14 +108,17 @@ const metodoPagamento = [
 ]
 
 // Estilização dos items
-const HeaderFlex = styled.header`
+const HeaderQueroVender = styled.header`
  height:70vh
+
+const DivFlex=styled.div`
+ height:70vh;
+ master
  width:100vw;
  display:flex;
  flex-direction:column;
  align-items:center;
- position:relative;
- top:100px;
+ padding-top: 70px;
 `
 
 const BlocoInput = styled.div`
@@ -173,6 +175,7 @@ text-transform: none;
   background-color: #248c85;
 }
 `
+
 
 class QueroVender extends React.Component {
 
@@ -245,7 +248,7 @@ class QueroVender extends React.Component {
       <div>
         <Header />
 
-        <HeaderFlex>
+        <HeaderQueroVender>
           <TextoVendas><h3>Cadastro de Produto</h3> </TextoVendas>
 
           <BlocoInput>
@@ -258,11 +261,28 @@ class QueroVender extends React.Component {
             />
 
             <TextField
+
+class QueroVender extends React.Component{
+    render() {
+        return(
+            <DivFlex>
+               <TextoVendas><h3>Cadastro de Produto</h3> </TextoVendas>
+             
+             <BlocoInput>
+             <TextField 
+               label="Titulo * "
+               fullWidth
+               variant="outlined"
+              />
+              
+              <TextField
+ 
               label="Descrição *"
               fullWidth
               multiline
               rowsMax="20"
               variant="outlined"
+
               value={this.state.pegaDescricaoValue}
               onChange={this.onChangePegaDescricao}
             />
@@ -353,6 +373,80 @@ class QueroVender extends React.Component {
       </div>
     )
   }
+              />
+              </BlocoInput>
+
+              <div>
+                <TextoCategorias> <h4>Categorias *</h4> </TextoCategorias>
+
+                <TextField
+                    select
+                    label="01"
+                    variant="outlined"
+                    value={""}
+                    SelectProps={{
+                        MenuProps: {
+                        },
+                }}/>
+                 
+                 </div>
+
+              <div>
+                 <TextoFotos> <h4>Fotos *</h4></TextoFotos>
+                  <TextField
+                  placeholder= {'Cole a URL Da Foto'}
+                  variant="outlined"
+                  />
+              </div>
+
+              <TextoPreco>
+                  <TextField
+                  placeholder={'Preço (R$)'}
+                  type="number"
+                  variant="outlined"
+                  />
+              </TextoPreco>
+
+              <MetodosDePagamento>
+               <h5>Metodo De Pagamento</h5>
+
+               <TextField
+                    select
+                    label="Nenhum"
+                    variant="outlined"
+                    value={""}
+                    SelectProps={{
+                        MenuProps: {
+                        },
+                }}/>
+              
+              </MetodosDePagamento>
+
+              <QuantidadeDeParcela>
+                <h5>Quantidade De Parcelas</h5>
+             
+                <TextField
+                    select
+                    label="QTD Parcelas"
+                    variant="outlined"
+                    value={""}
+                    SelectProps={{
+                        MenuProps: {
+                        },
+                }}/>
+              </QuantidadeDeParcela>
+
+              <ButtonConcluir>
+                <label>
+                  <Button variant="extendedFab" size="medium" component="span">
+                   Concluir
+                  </Button>
+                </label>
+              </ButtonConcluir>
+            </DivFlex>
+        )
+    }
+ master
 }
 
 export default QueroVender
