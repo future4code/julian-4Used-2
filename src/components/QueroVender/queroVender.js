@@ -7,9 +7,113 @@ import styled, { ThemeConsumer } from 'styled-components'
 //imports para Material UI
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab'
+import MenuItem from '@material-ui/core/MenuItem';
+import Axios from 'axios';
+
+const ranges = [
+  {
+    label: "Todos",
+  },
+  {
+    value: 'decoracao',
+    label: 'decoração',
+  },
+  {
+    value: 'calcados',
+    label: 'calçados',
+  },
+  {
+    value: 'eletronicos',
+    label: 'eletrônicos',
+  },
+  {
+    value: 'moveis',
+    label: 'móveis',
+  },
+];
+
+const quantidadeParcela = [
+  {
+    value: "01",
+    label: "01"
+  },
+
+  {
+    value: "02",
+    label: "02"
+  },
+
+  {
+    value: "03",
+    label: "03"
+  },
+
+  {
+    value: "04",
+    label: "04"
+  },
+
+  {
+    value: "05",
+    label: "05"
+  },
+
+  {
+    value: "06",
+    label: "06"
+  },
+
+  {
+    value: "07",
+    label: "07"
+  },
+
+  {
+    value: "08",
+    label: "08"
+  },
+
+  {
+    value: "09",
+    label: "09"
+  },
+
+  {
+    value: "10",
+    label: "10"
+  },
+
+  {
+    value: "11",
+    label: "11"
+  },
+
+  {
+    value: "12",
+    label: "12"
+  },
+]
+
+const metodoPagamento = [
+  {
+    value: "card",
+    label: "Cartão"
+  },
+
+  {
+    value: "boleto",
+    label: "boleto"
+  }
+]
+
+// Estilização dos items
+const HeaderQueroVender = styled.header`
+ height:70vh
 
 const DivFlex=styled.div`
  height:70vh;
+ master
  width:100vw;
  display:flex;
  flex-direction:column;
@@ -17,48 +121,146 @@ const DivFlex=styled.div`
  padding-top: 70px;
 `
 
-const BlocoInput=styled.div`
+const BlocoInput = styled.div`
 width:60vw;
 padding:20px
 `
 
-const TextoVendas=styled.h3`
+const TextoVendas = styled.h3`
 font-size: 1.3em;
 margin-right:540px
 `
 
-const TextoCategorias=styled.h4`
+const TextoCategorias = styled.h4`
 margin-right:690px
 `
+const Seletor = styled(TextField)`
+flex-basis:200px;
+`
 
-const TextoFotos=styled.h4`
+const TextoFotos = styled.h4`
 margin-right:727px
 `
 
-const TextoPreco=styled.h4`
+const TextoPreco = styled.h4`
 margin-right:538px
 `
 
-const MetodosDePagamento=styled.div`
+const MetodosDePagamento = styled.div`
 display:flex;
 flex-direction:column;
 position:relative;
 right:316px;
 `
 
-const QuantidadeDeParcela=styled.div`
+const QuantidadeDeParcela = styled.div`
 display:flex;
 flex-direction:column;
 position:relative;
-bottom: 114px;
+bottom:260px;
 right:40px
 `
 
-const ButtonConcluir=styled.div`
+const DivBotao = styled.div`
 position:relative;
 left:220px;
-bottom:165px;
+bottom:440px;
 `
+const ButtonConcluir = styled(Fab)`
+background-color: #45aaa4;
+color:white;
+font-weight: bold;
+text-transform: none;
+:hover {
+  background-color: #248c85;
+}
+`
+
+
+class QueroVender extends React.Component {
+
+  state = {
+    pegaTituloValue: '',
+    pegaDescricaoValue: '',
+    pegaCategoriaValue: '',
+    pegaFotoValue: '',
+    pegaPrecoValue: '',
+    pegaMetodoDePagamentoValue: '',
+    pegaParcelaValue: ''
+  }
+
+  onchangePegaTitulo = event => {
+    this.setState({ pegaTituloValue: event.target.value })
+  }
+
+  onChangePegaDescricao = event => {
+    this.setState({ pegaDescricaoValue: event.target.value })
+  }
+
+  onChangepegaCategoria = event => {
+    this.setState({ pegaCategoriaValue: event.target.value })
+  }
+
+  onChangePegaFoto = event => {
+    this.setState({ pegaFotoValue: event.target.value })
+  }
+
+  onChangePegaPreco = event => {
+    this.setState({ pegaPrecoValue: event.target.value })
+  }
+
+  onChangepegaMetodoPagamento = event => {
+    this.setState({ pegaMetodoDePagamentoValue: event.target.value })
+  }
+
+  onChangePegaParcela = event => {
+    this.setState({ pegaParcelaValue: event.target.value })
+  }
+
+  onClickCriaProduto = () => {
+    this.criaProduto ( this.state.pegaTituloValue, this.state.pegaDescricaoValue, this.state.pegaCategoriaValue, this.state.pegaFotoValue, this.state.pegaPrecoValue, this.state.pegaMetodoDePagamentoValue, this.state.pegaParcelaValue)
+  }
+     
+    criaProduto = (titulo, descricao, categoria, foto, preco, metodoPagamentos, parcela) =>{
+      const body = {
+        name: titulo,
+        description: descricao,
+        price: preco,
+        paymentMethod: metodoPagamentos,
+        category: categoria,
+        photos: [foto],
+        installments: parcela
+      }
+
+      Axios
+       .post(
+        "https://us-central1-labenu-apis.cloudfunctions.net/fourUsedTwo/products", body
+       )
+       .then(resposta  =>{console.log("UHUL DEU CERTO!!!!!", resposta)})
+       .catch(error =>{ console.log("DEU ERRO :((((", error.response)})
+
+    }
+
+  render() {
+
+    return (
+      // div criada pra englobar o Header
+      <div>
+        <Header />
+
+        <HeaderQueroVender>
+          <TextoVendas><h3>Cadastro de Produto</h3> </TextoVendas>
+
+          <BlocoInput>
+            <TextField
+              label="Titulo * "
+              fullWidth
+              variant="outlined"
+              value={this.state.pegaTituloValue}
+              onChange={this.onchangePegaTitulo}
+            />
+
+            <TextField
 
 class QueroVender extends React.Component{
     render() {
@@ -74,11 +276,103 @@ class QueroVender extends React.Component{
               />
               
               <TextField
+ 
               label="Descrição *"
               fullWidth
               multiline
               rowsMax="20"
               variant="outlined"
+
+              value={this.state.pegaDescricaoValue}
+              onChange={this.onChangePegaDescricao}
+            />
+          </BlocoInput>
+
+          <div>
+            <TextoCategorias> <h4>Categorias *</h4> </TextoCategorias>
+
+            <Seletor
+              select
+              variant="outlined"
+              value={this.state.pegaCategoriaValue}
+              onChange={this.onChangepegaCategoria}
+            >
+              {ranges.map(option => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </Seletor>
+
+          </div>
+
+          <div>
+            <TextoFotos> <h4>Fotos *</h4></TextoFotos>
+            <TextField
+              placeholder={'Cole a URL Da Foto'}
+              variant="outlined"
+              value={this.state.pegaFotoValue}
+              onChange={this.onChangePegaFoto}
+            />
+          </div>
+
+          <TextoPreco>
+            <TextField
+              placeholder={'Preço (R$)'}
+              type="number"
+              variant="outlined"
+              value={this.state.pegaPrecoValue}
+              onChange={this.onChangePegaPreco}
+            />
+          </TextoPreco>
+
+          <MetodosDePagamento>
+            <h5>Metodo De Pagamento</h5>
+
+            <Seletor
+              select
+              variant="outlined"
+              value={this.state.pegaMetodoDePagamentoValue}
+              onChange={this.onChangepegaMetodoPagamento}
+            >
+              {metodoPagamento.map(metodo => (
+                <MenuItem key={metodo.value} value={metodo.value}>
+                  {metodo.label}
+                </MenuItem>
+              ))}
+            </Seletor>
+
+
+          </MetodosDePagamento>
+
+          <QuantidadeDeParcela>
+            <h5>Quantidade De Parcelas</h5>
+
+            <Seletor
+              select
+              variant="outlined"
+              value={this.state.pegaParcelaValue}
+              onChange={this.onChangePegaParcela}
+            >
+              {quantidadeParcela.map(quantidade => (
+                <MenuItem key={quantidade.value} value={quantidade.value}>
+                  {quantidade.label}
+                </MenuItem>
+              ))}
+            </Seletor>
+          </QuantidadeDeParcela>
+
+          <DivBotao>
+            <ButtonConcluir variant="extended" size="medium" onClick={this.onClickCriaProduto}>
+              Concluir
+            </ButtonConcluir>
+          </DivBotao>
+
+
+        </HeaderFlex>
+      </div>
+    )
+  }
               />
               </BlocoInput>
 
@@ -152,6 +446,7 @@ class QueroVender extends React.Component{
             </DivFlex>
         )
     }
+ master
 }
 
 export default QueroVender
