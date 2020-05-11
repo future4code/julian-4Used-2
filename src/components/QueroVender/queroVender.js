@@ -176,10 +176,6 @@ class QueroVender extends React.Component{
     parcelas: ''
   }
 
-  componentDidUpdate = () => {
-    console.log(this.state);
-  }
-
   onChangeTitulo = (event) => {
     this.setState({titulo: event.target.value});
   }
@@ -218,7 +214,6 @@ class QueroVender extends React.Component{
       photos: [this.state.foto],
       installments: this.state.parcelas
     }
-    console.log(body);
 
     axios
       .post("https://us-central1-labenu-apis.cloudfunctions.net/fourUsedTwo/products", body)
