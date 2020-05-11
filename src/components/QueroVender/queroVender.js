@@ -281,7 +281,7 @@ class QueroVender extends React.Component{
           <TextoPreco>
               <TextField
                 placeholder={'Preço (R$)'}
-                type="number"
+                type= "number"
                 variant="outlined"
                 value={this.state.valor}
                 onChange={this.onChangeValor}

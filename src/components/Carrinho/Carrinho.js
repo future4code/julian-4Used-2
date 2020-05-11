@@ -55,7 +55,7 @@ class Carrinho extends React.Component {
                 })}                
             </CardContent>
             <TotalDoCarrinho>
-                <TotalDoValor>Total: R${this.pegaTotal()}</TotalDoValor>
+                <TotalDoValor>Total: R${this.pegaTotal().toFixed(2)}</TotalDoValor>
             </TotalDoCarrinho>
         </DivApp>    
          )
