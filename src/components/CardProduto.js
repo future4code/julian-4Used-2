@@ -22,13 +22,13 @@ const IconeCarrinho = styled(AddShoppingCart)`
 //componente que retorna cada produto individualmente, chamado na SecaoProdutos.js passando props
 class CardProduto extends React.Component {
     render(){
-        const valor=this.props.valor, parcelas=this.props.parcelas
+        const valor=Number(this.props.valor), parcelas=Number(this.props.parcelas)
         const valorParcela=valor/parcelas;
         return <ContainerProduto>
             <Imagem src={this.props.linkImagem} />
             {this.props.pagamento==='card' 
-                ? <p>R${this.props.valor.toFixed(2)} em {this.props.parcelas}x de R${valorParcela.toFixed(2)} no cartão</p>
-                : <p>R${this.props.valor.toFixed(2)} à vista</p>
+                ? <p>R${valor.toFixed(2)} em {this.props.parcelas}x de R${valorParcela.toFixed(2)} no cartão</p>
+                : <p>R${valor.toFixed(2)} à vista</p>
             }
             <IconButton onClick={() => this.props.passarCarrinho(this.props.id)}>
                 <IconeCarrinho />

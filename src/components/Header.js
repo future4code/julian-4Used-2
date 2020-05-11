@@ -5,35 +5,8 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import Search from '@material-ui/icons/Search';
 import Fab from '@material-ui/core/Fab';
 import red from '@material-ui/core/colors/red';
-import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
 import logo from '../img/4used.png'
 
-const Seletor = styled(TextField)`
-  flex-basis:200px;
-`
-
-const ranges = [
-  { 
-  label:"Todos",
-  },
-  {
-    value: 'decoracao',
-    label: 'decoração',
-  },
-  {
-    value: 'calcados',
-    label: 'calçados',
-  },
-  {
-    value: 'eletronicos',
-    label: 'eletrônicos',
-  },
-  {
-    value: 'moveis',
-    label: 'móveis',
-  },
-];
 
 const HeaderFlex = styled.header`
   ${props => (props.estado==='') && ({position: 'fixed'})} 
@@ -47,10 +20,13 @@ const HeaderFlex = styled.header`
 `
 
 const ImgLogo = styled.img`
-    width: 80px;
-    cursor: pointer;
+  width: 80px;
+  cursor: pointer;
 `
 
+const InputBusca = styled(Input)`
+  flex-basis: 45%;
+`
 
 const Botao1 = styled(Fab)`    
   background-color: #45aaa4;
@@ -94,24 +70,13 @@ class Header extends React.Component {
   render() {
     return (
       <HeaderFlex estado={this.props.estado}>
-        <ImgLogo src={logo} onClick={() => this.props.mudarSecao('')} />
-        <Seletor
-          select        
-          variant="filled"
-        >
-          {ranges.map(option => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </Seletor>   
-        <Input startAdornment={
+        <ImgLogo src={logo} onClick={() => this.props.mudarSecao('')} /> 
+        <InputBusca startAdornment={
           <InputAdornment position="start">
             <Search />
           </InputAdornment>}
           placeholder="Buscar"
         />
-
         <DivBotao>
           <Botao1 size="small" variant="extended" onClick={() => this.props.mudarSecao('cadastro')}>quero vender</Botao1>
           <Botao2 variant="extended" onClick={() => this.props.mudarSecao('carrinho')}>carrinho</Botao2>
