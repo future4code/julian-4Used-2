@@ -12,7 +12,8 @@ const DivApp=styled.div`
 export class AppContainer extends Component {
   state={
     secaoAtual: '',
-    listaCarrinho: []
+    listaCarrinho: [],
+    itemBuscado: ''
   }
 
   componentDidUpdate = () => {
@@ -51,27 +52,31 @@ export class AppContainer extends Component {
     this.setState({secaoAtual: secaoClicada});
   }
 
+  recebeBusca = (valorInput) => {
+    this.setState({itemBuscado: valorInput})
+  }
+
   render() {
     switch(this.state.secaoAtual){
       case 'cadastro':
         return (
           <DivApp>
-            <Header estado={this.state.secaoAtual} mudarSecao={this.mudarSecao} />
+            <Header estado={this.state.secaoAtual} mudarSecao={this.mudarSecao} recebeBusca={this.recebeBusca} />
             <QueroVender />
           </DivApp>
         )
       case 'carrinho':
         return (
           <DivApp>
-            <Header estado={this.state.secaoAtual} mudarSecao={this.mudarSecao} />
+            <Header estado={this.state.secaoAtual} mudarSecao={this.mudarSecao} recebeBusca={this.recebeBusca} />
             <Carrinho lista={this.state.listaCarrinho} removerDoCarrinho={this.removerDoCarrinho}/>
           </DivApp>
         )
       default:
           return (
             <DivApp>
-              <Header estado={this.state.secaoAtual} mudarSecao={this.mudarSecao} />
-              <SecaoProdutos adicionarAoCarrinho={this.adicionarAoCarrinho} />
+              <Header estado={this.state.secaoAtual} mudarSecao={this.mudarSecao} recebeBusca={this.recebeBusca} />
+              <SecaoProdutos adicionarAoCarrinho={this.adicionarAoCarrinho} itemBuscado={this.state.itemBuscado} />
             </DivApp>
         )
     }

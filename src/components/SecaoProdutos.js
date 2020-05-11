@@ -40,6 +40,15 @@ class SecaoProdutos extends React.Component {
         this.pegaListaDeProdutos();
     }
 
+    pesquisaPorNome = (lista) => {
+        lista = lista.filter(produto =>{
+            if(produto.name.toLowerCase().includes(this.props.itemBuscado.toLowerCase())){
+                return true
+            }
+        })
+        return lista;
+    }
+
     listaCategorias = (lista) => {
         let listaDeCategorias = [];
         lista.forEach(produto =>{
@@ -133,6 +142,7 @@ class SecaoProdutos extends React.Component {
     render(){
         let lista = [...this.state.listaDeProdutos];
         const  listaDeCategorias = this.listaCategorias(lista);
+        lista = this.pesquisaPorNome(lista)
         lista = this.categorizaProdutos(lista);
         lista = this.filtraPorValor(lista);
         lista = lista.sort(this.ordenaProdutos)
