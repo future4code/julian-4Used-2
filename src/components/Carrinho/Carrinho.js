@@ -6,7 +6,6 @@ const CardContent = styled.div`
     display: block;
 `
 const DivApp = styled.div`
-  padding-top: 80px;
   margin: 0 20%;
 `
 const TituloCarrinho = styled.div`
@@ -16,7 +15,7 @@ const TituloCarrinho = styled.div`
 const TotalDoCarrinho =  styled.div`
     display: flex;
     justify-content: flex-end;
-    align-itens: flex-end;
+    align-items: flex-end;
 `
 const TotalDoValor = styled.p`
     font-size: 60px;

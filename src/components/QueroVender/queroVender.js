@@ -1,15 +1,9 @@
-// Imports De Componentes React
 import React from 'react';
-
-// Imports de Libs Para Desenvolvimento
-import styled, { ThemeConsumer } from 'styled-components'
-
-//imports para Material UI
+import styled from 'styled-components'
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab'
 import MenuItem from '@material-ui/core/MenuItem';
-import Axios from 'axios';
+import axios from 'axios'
 
 const ranges = [
   {
@@ -32,6 +26,18 @@ const ranges = [
     label: 'móveis',
   },
 ];
+
+const metodoPagamento = [
+  {
+    value: "card",
+    label: "Cartão"
+  },
+
+  {
+    value: "boleto",
+    label: "boleto"
+  }
+]
 
 const quantidadeParcela = [
   {
@@ -95,207 +101,164 @@ const quantidadeParcela = [
   },
 ]
 
-const metodoPagamento = [
-  {
-    value: "card",
-    label: "Cartão"
-  },
-
-  {
-    value: "boleto",
-    label: "boleto"
-  }
-]
-
-// Estilização dos items
-const HeaderQueroVender = styled.header`
- height:70vh
-
 const DivFlex=styled.div`
  height:70vh;
- master
  width:100vw;
  display:flex;
  flex-direction:column;
  align-items:center;
- padding-top: 70px;
 `
 
-const BlocoInput = styled.div`
-width:60vw;
-padding:20px
+const BlocoInput=styled.div`
+  width:60vw;
+  padding:20px
 `
 
-const TextoVendas = styled.h3`
-font-size: 1.3em;
-margin-right:540px
+const TextoVendas=styled.h3`
+  font-size: 1.3em;
+  margin-right:540px
 `
 
-const TextoCategorias = styled.h4`
-margin-right:690px
+const TextoCategorias=styled.h4`
+  margin-right:690px
 `
+
 const Seletor = styled(TextField)`
-flex-basis:200px;
+  flex-basis:200px;
 `
 
-const TextoFotos = styled.h4`
-margin-right:727px
+const TextoFotos=styled.h4`
+  margin-right:727px
 `
 
-const TextoPreco = styled.h4`
-margin-right:538px
+const TextoPreco=styled.h4`
+  margin-right:538px
 `
 
-const MetodosDePagamento = styled.div`
-display:flex;
-flex-direction:column;
-position:relative;
-right:316px;
+const MetodosDePagamento=styled.div`
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  right:316px;
 `
 
-const QuantidadeDeParcela = styled.div`
-display:flex;
-flex-direction:column;
-position:relative;
-bottom:260px;
-right:40px
+const QuantidadeDeParcela=styled.div`
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  bottom: 260px;
+  right:40px
 `
 
 const DivBotao = styled.div`
-position:relative;
-left:220px;
-bottom:440px;
+  position:relative;
+  left:220px;
+  bottom:440px;
 `
 const ButtonConcluir = styled(Fab)`
-background-color: #45aaa4;
-color:white;
-font-weight: bold;
-text-transform: none;
-:hover {
-  background-color: #248c85;
-}
+  background-color: #45aaa4;
+  color:white;
+  font-weight: bold;
+  text-transform: none;
+  :hover {
+    background-color: #248c85;
+  }
 `
 
-
-class QueroVender extends React.Component {
-
-  state = {
-    pegaTituloValue: '',
-    pegaDescricaoValue: '',
-    pegaCategoriaValue: '',
-    pegaFotoValue: '',
-    pegaPrecoValue: '',
-    pegaMetodoDePagamentoValue: '',
-    pegaParcelaValue: ''
+class QueroVender extends React.Component{
+  state={
+    titulo: '',
+    descricao: '',
+    categoria: '',
+    foto: '',
+    valor: '',
+    pagamento: '',
+    parcelas: ''
   }
 
-  onchangePegaTitulo = event => {
-    this.setState({ pegaTituloValue: event.target.value })
+  onChangeTitulo = (event) => {
+    this.setState({titulo: event.target.value});
   }
 
-  onChangePegaDescricao = event => {
-    this.setState({ pegaDescricaoValue: event.target.value })
+  onChangeDescricao = (event) => {
+    this.setState({descricao: event.target.value});
   }
 
-  onChangepegaCategoria = event => {
-    this.setState({ pegaCategoriaValue: event.target.value })
+  onChangeCategoria = (event) => {
+    this.setState({categoria: event.target.value});
   }
 
-  onChangePegaFoto = event => {
-    this.setState({ pegaFotoValue: event.target.value })
+  onChangeFoto = (event) => {
+    this.setState({foto: event.target.value});
   }
 
-  onChangePegaPreco = event => {
-    this.setState({ pegaPrecoValue: event.target.value })
+  onChangeValor = (event) => {
+    this.setState({valor: event.target.value});
   }
 
-  onChangepegaMetodoPagamento = event => {
-    this.setState({ pegaMetodoDePagamentoValue: event.target.value })
+  onChangePagamento = (event) => {
+    this.setState({pagamento: event.target.value});
   }
 
-  onChangePegaParcela = event => {
-    this.setState({ pegaParcelaValue: event.target.value })
+  onChangeParcelas = (event) => {
+    this.setState({parcelas: event.target.value});
   }
 
   onClickCriaProduto = () => {
-    this.criaProduto ( this.state.pegaTituloValue, this.state.pegaDescricaoValue, this.state.pegaCategoriaValue, this.state.pegaFotoValue, this.state.pegaPrecoValue, this.state.pegaMetodoDePagamentoValue, this.state.pegaParcelaValue)
-  }
-     
-    criaProduto = (titulo, descricao, categoria, foto, preco, metodoPagamentos, parcela) =>{
-      const body = {
-        name: titulo,
-        description: descricao,
-        price: preco,
-        paymentMethod: metodoPagamentos,
-        category: categoria,
-        photos: [foto],
-        installments: parcela
-      }
-
-      Axios
-       .post(
-        "https://us-central1-labenu-apis.cloudfunctions.net/fourUsedTwo/products", body
-       )
-       .then(resposta  =>{console.log("UHUL DEU CERTO!!!!!", resposta)})
-       .catch(error =>{ console.log("DEU ERRO :((((", error.response)})
-
+    const body = {
+      name: this.state.titulo,
+      description: this.state.descricao,
+      price: this.state.valor,
+      paymentMethod: this.state.pagamento,
+      category: this.state.categoria,
+      photos: [this.state.foto],
+      installments: this.state.parcelas
     }
 
+    axios
+      .post("https://us-central1-labenu-apis.cloudfunctions.net/fourUsedTwo/products", body)
+      .then(resposta => {
+        return (
+          this.setState({titulo: '', descricao: '', categoria: '', foto: '', valor: '', pagamento: '', parcelas: ''}),
+          alert("Cadastro realizado com sucesso!")
+        )
+      })
+      .catch(error => {
+        return (alert(`Status do erro: ${error.response.status}\nMensagem: ${error.response.data.message}`))
+      })
+  }
+
   render() {
-
-    return (
-      // div criada pra englobar o Header
-      <div>
-        <Header />
-
-        <HeaderQueroVender>
-          <TextoVendas><h3>Cadastro de Produto</h3> </TextoVendas>
-
-          <BlocoInput>
+      return(
+        <DivFlex>
+           <TextoVendas>Cadastro de Produto </TextoVendas>
+         <BlocoInput>
+          <TextField 
+            label="Titulo * "
+            fullWidth
+            variant="outlined"
+            value={this.state.titulo}
+            onChange={this.onChangeTitulo}
+          />
+            
             <TextField
-              label="Titulo * "
-              fullWidth
-              variant="outlined"
-              value={this.state.pegaTituloValue}
-              onChange={this.onchangePegaTitulo}
-            />
-
-            <TextField
-
-class QueroVender extends React.Component{
-    render() {
-        return(
-            <DivFlex>
-               <TextoVendas><h3>Cadastro de Produto</h3> </TextoVendas>
-             
-             <BlocoInput>
-             <TextField 
-               label="Titulo * "
-               fullWidth
-               variant="outlined"
-              />
-              
-              <TextField
- 
-              label="Descrição *"
-              fullWidth
-              multiline
-              rowsMax="20"
-              variant="outlined"
-
-              value={this.state.pegaDescricaoValue}
-              onChange={this.onChangePegaDescricao}
+            label="Descrição *"
+            fullWidth
+            multiline
+            rowsMax="20"
+            variant="outlined"
+            value={this.state.descricao}
+            onChange={this.onChangeDescricao}
             />
           </BlocoInput>
 
           <div>
-            <TextoCategorias> <h4>Categorias *</h4> </TextoCategorias>
-
+            <TextoCategorias>Categorias *</TextoCategorias>
             <Seletor
               select
               variant="outlined"
-              value={this.state.pegaCategoriaValue}
-              onChange={this.onChangepegaCategoria}
+              value={this.state.categoria}
+              onChange={this.onChangeCategoria}
             >
               {ranges.map(option => (
                 <MenuItem key={option.value} value={option.value}>
@@ -303,37 +266,35 @@ class QueroVender extends React.Component{
                 </MenuItem>
               ))}
             </Seletor>
-
           </div>
 
           <div>
-            <TextoFotos> <h4>Fotos *</h4></TextoFotos>
-            <TextField
-              placeholder={'Cole a URL Da Foto'}
-              variant="outlined"
-              value={this.state.pegaFotoValue}
-              onChange={this.onChangePegaFoto}
-            />
+             <TextoFotos>Fotos *</TextoFotos>
+              <TextField
+                placeholder= {'Cole a URL Da Foto'}
+                variant="outlined"
+                value={this.state.foto}
+                onChange={this.onChangeFoto}
+              />
           </div>
 
           <TextoPreco>
-            <TextField
-              placeholder={'Preço (R$)'}
-              type="number"
-              variant="outlined"
-              value={this.state.pegaPrecoValue}
-              onChange={this.onChangePegaPreco}
-            />
+              <TextField
+                placeholder={'Preço (R$)'}
+                type="number"
+                variant="outlined"
+                value={this.state.valor}
+                onChange={this.onChangeValor}
+              />
           </TextoPreco>
 
           <MetodosDePagamento>
-            <h5>Metodo De Pagamento</h5>
-
-            <Seletor
+           <h5>Metodo De Pagamento</h5>
+           <Seletor
               select
               variant="outlined"
-              value={this.state.pegaMetodoDePagamentoValue}
-              onChange={this.onChangepegaMetodoPagamento}
+              value={this.state.pagamento}
+              onChange={this.onChangePagamento}
             >
               {metodoPagamento.map(metodo => (
                 <MenuItem key={metodo.value} value={metodo.value}>
@@ -341,18 +302,15 @@ class QueroVender extends React.Component{
                 </MenuItem>
               ))}
             </Seletor>
-
-
           </MetodosDePagamento>
 
           <QuantidadeDeParcela>
             <h5>Quantidade De Parcelas</h5>
-
             <Seletor
               select
               variant="outlined"
-              value={this.state.pegaParcelaValue}
-              onChange={this.onChangePegaParcela}
+              value={this.state.parcelas}
+              onChange={this.onChangeParcelas}
             >
               {quantidadeParcela.map(quantidade => (
                 <MenuItem key={quantidade.value} value={quantidade.value}>
@@ -361,92 +319,14 @@ class QueroVender extends React.Component{
               ))}
             </Seletor>
           </QuantidadeDeParcela>
-
           <DivBotao>
             <ButtonConcluir variant="extended" size="medium" onClick={this.onClickCriaProduto}>
               Concluir
             </ButtonConcluir>
           </DivBotao>
-
-
-        </HeaderFlex>
-      </div>
-    )
+        </DivFlex>
+      )
   }
-              />
-              </BlocoInput>
-
-              <div>
-                <TextoCategorias> <h4>Categorias *</h4> </TextoCategorias>
-
-                <TextField
-                    select
-                    label="01"
-                    variant="outlined"
-                    value={""}
-                    SelectProps={{
-                        MenuProps: {
-                        },
-                }}/>
-                 
-                 </div>
-
-              <div>
-                 <TextoFotos> <h4>Fotos *</h4></TextoFotos>
-                  <TextField
-                  placeholder= {'Cole a URL Da Foto'}
-                  variant="outlined"
-                  />
-              </div>
-
-              <TextoPreco>
-                  <TextField
-                  placeholder={'Preço (R$)'}
-                  type="number"
-                  variant="outlined"
-                  />
-              </TextoPreco>
-
-              <MetodosDePagamento>
-               <h5>Metodo De Pagamento</h5>
-
-               <TextField
-                    select
-                    label="Nenhum"
-                    variant="outlined"
-                    value={""}
-                    SelectProps={{
-                        MenuProps: {
-                        },
-                }}/>
-              
-              </MetodosDePagamento>
-
-              <QuantidadeDeParcela>
-                <h5>Quantidade De Parcelas</h5>
-             
-                <TextField
-                    select
-                    label="QTD Parcelas"
-                    variant="outlined"
-                    value={""}
-                    SelectProps={{
-                        MenuProps: {
-                        },
-                }}/>
-              </QuantidadeDeParcela>
-
-              <ButtonConcluir>
-                <label>
-                  <Button variant="extendedFab" size="medium" component="span">
-                   Concluir
-                  </Button>
-                </label>
-              </ButtonConcluir>
-            </DivFlex>
-        )
-    }
- master
 }
 
 export default QueroVender
