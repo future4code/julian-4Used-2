@@ -59,7 +59,7 @@ class CardCarrinho extends React.Component {
                   <Botao><IconeAdiciona/></Botao>
               </DivQuantidade>
               <DivPrecoProdutoIndividual>
-                  R${this.props.valor.toFixed(2)}
+                  R${parseFloat(this.props.valor).toFixed(2)}
               </DivPrecoProdutoIndividual>
           </ProdutoArtigo>
       </div>
