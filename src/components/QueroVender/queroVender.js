@@ -27,7 +27,6 @@ const ranges = [
   },
 ];
 
-
 const metodoPagamento = [
   {
     value: "card",
@@ -39,7 +38,6 @@ const metodoPagamento = [
     label: "boleto"
   }
 ]
-
 
 const quantidadeParcela = [
   {
@@ -105,12 +103,12 @@ const quantidadeParcela = [
 
 const DivFlex=styled.div`
  height:70vh;
- master
  width:100vw;
  display:flex;
  flex-direction:column;
  align-items:center;
 `
+
 const BlocoInput=styled.div`
   width:60vw;
   padding:20px
@@ -127,9 +125,6 @@ const TextoCategorias=styled.h4`
 
 const Seletor = styled(TextField)`
   flex-basis:200px;
-`
-const Seletor = styled(TextField)`
-flex-basis:200px;
 `
 
 const TextoFotos=styled.h4`
@@ -170,91 +165,6 @@ const ButtonConcluir = styled(Fab)`
   }
 `
 
-class QueroVender extends React.Component {
-
-  state = {
-    pegaTituloValue: '',
-    pegaDescricaoValue: '',
-    pegaCategoriaValue: '',
-    pegaFotoValue: '',
-    pegaPrecoValue: '',
-    pegaMetodoDePagamentoValue: '',
-    pegaParcelaValue: ''
-  }
-
-  onchangePegaTitulo = event => {
-    this.setState({ pegaTituloValue: event.target.value })
-  }
-
-  onChangePegaDescricao = event => {
-    this.setState({ pegaDescricaoValue: event.target.value })
-  }
-
-  onChangepegaCategoria = event => {
-    this.setState({ pegaCategoriaValue: event.target.value })
-  }
-
-  onChangePegaFoto = event => {
-    this.setState({ pegaFotoValue: event.target.value })
-  }
-
-  onChangePegaPreco = event => {
-    this.setState({ pegaPrecoValue: event.target.value })
-  }
-
-  onChangepegaMetodoPagamento = event => {
-    this.setState({ pegaMetodoDePagamentoValue: event.target.value })
-  }
-
-  onChangePegaParcela = event => {
-    this.setState({ pegaParcelaValue: event.target.value })
-  }
-
-  onClickCriaProduto = () => {
-    this.criaProduto ( this.state.pegaTituloValue, this.state.pegaDescricaoValue, this.state.pegaCategoriaValue, this.state.pegaFotoValue, this.state.pegaPrecoValue, this.state.pegaMetodoDePagamentoValue, this.state.pegaParcelaValue)
-  }
-     
-    criaProduto = (titulo, descricao, categoria, foto, preco, metodoPagamentos, parcela) =>{
-      const body = {
-        name: titulo,
-        description: descricao,
-        price: preco,
-        paymentMethod: metodoPagamentos,
-        category: categoria,
-        photos: [foto],
-        installments: parcela
-      }
-
-      Axios
-       .post(
-        "https://us-central1-labenu-apis.cloudfunctions.net/fourUsedTwo/products", body
-       )
-       .then(resposta  =>{console.log("UHUL DEU CERTO!!!!!", resposta)})
-       .catch(error =>{ console.log("DEU ERRO :((((", error.response)})
-
-    }
-
-  render() {
-
-    return (
-      // div criada pra englobar o Header
-      <div>
-        <Header />
-
-        <HeaderQueroVender>
-          <TextoVendas><h3>Cadastro de Produto</h3> </TextoVendas>
-
-          <BlocoInput>
-            <TextField
-              label="Titulo * "
-              fullWidth
-              variant="outlined"
-              value={this.state.pegaTituloValue}
-              onChange={this.onchangePegaTitulo}
-            />
-
-            <TextField
-
 class QueroVender extends React.Component{
   state={
     titulo: '',
@@ -264,10 +174,6 @@ class QueroVender extends React.Component{
     valor: '',
     pagamento: '',
     parcelas: ''
-  }
-
-  componentDidUpdate = () => {
-    console.log(this.state);
   }
 
   onChangeTitulo = (event) => {
@@ -308,7 +214,6 @@ class QueroVender extends React.Component{
       photos: [this.state.foto],
       installments: this.state.parcelas
     }
-    console.log(body);
 
     axios
       .post("https://us-central1-labenu-apis.cloudfunctions.net/fourUsedTwo/products", body)
