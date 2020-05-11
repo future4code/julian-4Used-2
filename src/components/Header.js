@@ -67,6 +67,10 @@ const DivBotao = styled.div`
   margin: 10px;
 `
 class Header extends React.Component {
+  onChangeBusca = (event) => {
+    this.props.recebeBusca(event.target.value);
+  }
+
   render() {
     return (
       <HeaderFlex estado={this.props.estado}>
@@ -76,6 +80,7 @@ class Header extends React.Component {
             <Search />
           </InputAdornment>}
           placeholder="Buscar"
+          onChange={this.onChangeBusca}
         />
         <DivBotao>
           <Botao1 size="small" variant="extended" onClick={() => this.props.mudarSecao('cadastro')}>quero vender</Botao1>
